@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR Chatbot</title>
+</head>
+<body>
+    <h1>HR Chatbot</h1>
+    <textarea id="userInput" placeholder="Ask something..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+    <div id="response"></div>
+
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById("userInput").value;
+            const response = await fetch("http://<server-url>/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message})
+            });
+            const data = await response.json();
+            document.getElementById("response").innerText = data.response;
+        }
+    </script>
+</body>
+</html>
